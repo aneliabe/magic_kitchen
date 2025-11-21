@@ -1,5 +1,16 @@
+<h1>Recipes</h1>
+
 <ul>
   <% @recipes.each do |recipe| %>
-    <li><%= recipe.name%></li>
+    <li><%= link_to recipe.name, recipe_path(recipe)%></li>
+      <% if recipe.rating.present? %>
+        <span> | Rated: <%= recipe.rating %> ⭐</span>
+      <% else %>
+        <%= link_to "Rate", edit_recipe_path(recipe), class: "rate-button" %>
+      <% end %>
+      (<%= link_to "Edit", edit_recipe_path(recipe) %>)
+      (<%= link_to "Delete", recipe, method: :delete, data: { confirm: "Are you sure?" } %>)
   <% end %>
 </ul>
+
+<%= link_to "New Recipe", new_recipe_path %>
