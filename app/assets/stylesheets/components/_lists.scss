@@ -1,0 +1,19 @@
+.recipe-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recipe-item {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.recipe-actions {
+  margin-left: 10px;
+
+  a {
+    margin-right: 8px;
+  }
+}

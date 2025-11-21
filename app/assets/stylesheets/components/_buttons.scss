@@ -1,0 +1,56 @@
+.button {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f8f8f8;
+  color: #333;
+  text-decoration: none;
+  font-size: 15px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background: #eaeaea;
+    border-color: #bbb;
+  }
+}
+
+.button--primary {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+
+  &:hover {
+    background: #333;
+  }
+}
+
+.button--danger {
+  color: #b00000;
+  border-color: #b00000;
+
+  &:hover {
+    background: #ffe6e6;
+    border-color: #800000;
+  }
+}
+
+.button--link {
+  color: #333;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.link--plain {
+  color: #333;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 25px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

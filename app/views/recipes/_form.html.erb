@@ -1,7 +1,11 @@
-<%= simple_form_for recipe do |f| %>
-  <%= f.input :name %>
-  <%= f.input :ingredient, as: :text %>
-  <%= f.input :rating, as: :integer, required: false %>
+<div>
+  <%= simple_form_for recipe do |f| %>
+    <%= f.input :name %>
+    <%= f.input :ingredient, as: :text %>
+    <%= f.input :rating, as: :integer, required: false %>
 
-  <%= f.button :submit %>
-<% end %>
+    <%= f.button :submit, class: "button button--primary" %>
+  <% end %>
+</div>
+
+
