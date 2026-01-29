@@ -1,5 +1,7 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: %i[new create]
+  before_action :set_recipe, only: %i[show edit update destroy]
+  before_action :authorize_recipe!, only: %i[edit update destroy]
 
 
   def index
@@ -17,11 +19,12 @@ class RecipesController < ApplicationController
 
 
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = current_user.recipes.build(recipe_params)
+
     if @recipe.save
       redirect_to @recipe, notice: "Recipe created successfully."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -47,6 +50,10 @@ class RecipesController < ApplicationController
 
   def set_recipe
     @recipe = Recipe.find(params[:id])
+  end
+
+  def authorize_recipe!
+    redirect_to recipes_path, alert: "Not authorized" unless @recipe.user == current_user
   end
 
   def recipe_params

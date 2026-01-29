@@ -6,9 +6,16 @@
 
   <%= link_to "Edit", edit_recipe_path(@recipe), class: "button button--link" %>
   <%= link_to "Back", recipes_path, class: "button button--link" %>
-  <%= link_to "Delete", @recipe, method: :delete,
-      data: { confirm: "Are you sure?" },
+  <%= link_to "Delete",
+      recipe_path(@recipe),
+      data: {
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure?"
+      },
       class: "button button--danger" %>
+  <%= link_to "Share by email",
+      "mailto:?subject=#{CGI.escape(@recipe.name.presence || "Recipe from Magic Kitchen")}&body=#{CGI.escape(recipe_url(@recipe))}",
+      class: "button button--link" %>
 </div>
 
 
