@@ -2,20 +2,51 @@
   <h1><%= @recipe.name %></h1>
 
   <p><strong>Ingredients:</strong> <%= @recipe.ingredient %></p>
-  <p><strong>Rating:</strong> <%= @recipe.rating %></p>
+  <h2>Generated Recipe</h2>
 
-  <%= link_to "Edit", edit_recipe_path(@recipe), class: "button button--link" %>
-  <%= link_to "Back", recipes_path, class: "button button--link" %>
-  <%= link_to "Delete",
-      recipe_path(@recipe),
-      data: {
-        turbo_method: :delete,
-        turbo_confirm: "Are you sure?"
-      },
-      class: "button button--danger" %>
+  <%= @recipe.content %>
+
+  <% if user_signed_in? && @recipe.user == current_user %>
+    <div class="rating-section">
+      <%= form_with model: @recipe, method: :patch, local: true do |f| %>
+        <%= f.label :rating, "Your rating" %>
+
+        <div class="rating-inline">
+          <%= f.number_field :rating,
+                in: 1..5,
+                step: 1,
+                value: @recipe.rating,
+                class: "rating-input" %>
+
+          <%= f.submit "Rate", class: "button btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+    <%= link_to "Edit", edit_recipe_path(@recipe), class: "button button--link" %>
+    <%= link_to "Back", recipes_path, class: "button button--link" %>
+    <%= link_to "Delete",
+        recipe_path(@recipe),
+        data: {
+          turbo_method: :delete,
+          turbo_confirm: "Are you sure?"
+        },
+        class: "button button--danger" %>
+  <% else %>
+    <% if @recipe.rating.present? %>
+      <p><strong>Rating:</strong> <%= @recipe.rating %>/5 ⭐</p>
+    <% end %>
+  <% end %>
+  
   <%= link_to "Share by email",
-      "mailto:?subject=#{CGI.escape(@recipe.name.presence || "Recipe from Magic Kitchen")}&body=#{CGI.escape(recipe_url(@recipe))}",
+    "mailto:?subject=#{CGI.escape(@recipe.name.presence || "Recipe from Magic Kitchen")}&body=#{CGI.escape(recipe_url(@recipe))}",
+    class: "button button--link" %>
+  <%= link_to raw('<i class="bi bi-whatsapp"></i> Share'),
+    "https://wa.me/?text=#{CGI.escape("Check out this recipe: #{recipe_url(@recipe)}")}",
+    target: "_blank",
       class: "button button--link" %>
+
+
+
 </div>
 
 
