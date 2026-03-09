@@ -1,0 +1,90 @@
+.page-container {
+  // max-width: 700px;
+  margin: 40px auto;
+  padding: 32px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    color: #444;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  strong {
+    color: #333;
+  }
+}
+
+/* Recipe instructions */
+
+.page-container {
+  .recipe-content {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 10px;
+    white-space: pre-line;
+  }
+}
+
+/* Rating section */
+
+.recipe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.recipe-rating {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.rating-inline {
+  display: flex;
+  gap: 8px;
+}
+
+.rating-input {
+  width: 70px;
+  height: 38px;
+  text-align: center;
+}
+
+/* Buttons */
+
+.button {
+  display: inline-block;
+  margin-top: 16px;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.button--link {
+  color: #555;
+}
+
+.button--danger {
+  color: #d62828;
+}
+
+.back-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}

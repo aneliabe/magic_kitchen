@@ -1,12 +1,24 @@
 <div class="page-container">
-  <h1><%= @recipe.name %></h1>
+  <div class="back-button-container">
+    <%= link_to "Back", recipes_path, class: "button button--link" %>
+  </div>
+  <div class="recipe-header">
+    <h1><%= @recipe.name %></h1>
+    <% if @recipe.rating.present? %>
+      <div class="recipe-rating">
+        ⭐ <%= @recipe.rating %>/5
+      </div>
+    <% end %>
+  </div>
 
   <p><strong>Ingredients:</strong> <%= @recipe.ingredient %></p>
   <h2>Generated Recipe</h2>
 
-  <%= @recipe.content %>
+  <div class="recipe-content">
+    <%= @recipe.content %>
+  </div>
 
-  <% if user_signed_in? && @recipe.user == current_user %>
+  <% if user_signed_in? && @recipe.user == current_user && @recipe.rating.blank? %>
     <div class="rating-section">
       <%= form_with model: @recipe, method: :patch, local: true do |f| %>
         <%= f.label :rating, "Your rating" %>
@@ -22,8 +34,8 @@
         </div>
       <% end %>
     </div>
+  <% end %>
     <%= link_to "Edit", edit_recipe_path(@recipe), class: "button button--link" %>
-    <%= link_to "Back", recipes_path, class: "button button--link" %>
     <%= link_to "Delete",
         recipe_path(@recipe),
         data: {
@@ -31,11 +43,6 @@
           turbo_confirm: "Are you sure?"
         },
         class: "button button--danger" %>
-  <% else %>
-    <% if @recipe.rating.present? %>
-      <p><strong>Rating:</strong> <%= @recipe.rating %>/5 ⭐</p>
-    <% end %>
-  <% end %>
   
   <%= link_to "Share by email",
     "mailto:?subject=#{CGI.escape(@recipe.name.presence || "Recipe from Magic Kitchen")}&body=#{CGI.escape(recipe_url(@recipe))}",
@@ -45,16 +52,4 @@
     target: "_blank",
       class: "button button--link" %>
 
-
-
 </div>
-
-
-<!-- <h1><%= @recipe.name %></h1>
-<p>Ingredients: <%= @recipe.ingredient %></p>
-<p>Rating: <%= @recipe.rating %></p>
-
-<%= link_to "Edit", edit_recipe_path(@recipe) %> |
-<%= link_to "Back", recipes_path %> |
-<%= link_to "Delete", @recipe, method: :delete, data: { confirm: "Are you sure?" } %>
--->

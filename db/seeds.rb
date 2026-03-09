@@ -8,16 +8,33 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-# 1. Clean the database 🗑️
 puts "Cleaning database..."
 Recipe.destroy_all
+User.destroy_all
 
-# 2. Create the instances 🏗️
+puts "Creating user..."
+
+user = User.create!(
+  email: "demo@magickitchen.com",
+  password: "123456"
+)
+
 puts "Creating recipes..."
-Recipe.create!(name: "Galinhada", ingredient: "Frango desfiado, milho, arroz, cenoura", rating: 5)
-puts "Created Galinhada"
-Recipe.create!(name: "Pizza de calabresa", ingredient: "Mussarela, calabresa, molho de tomate, azeitona", rating: 4)
-puts "Created Pizza de calabresa"
 
-# 3. Display a message 🎉
-puts "Finished! Created #{Recipe.count} recipes."
+Recipe.create!(
+  name: "Pasta",
+  ingredient: "pasta, tomato sauce, garlic",
+  content: "1. Boil water in a large pot. 2. Add pasta and cook for 8–10 minutes. 3. Heat tomato sauce with garlic. 4. Drain pasta and mix with sauce. 5. Serve warm.",
+  rating: 4,
+  user: user
+)
+
+Recipe.create!(
+  name: "Omelette",
+  ingredient: "eggs, cheese, salt",
+  content: "1. Beat the eggs in a bowl. 2. Heat a pan with a little oil. 3. Pour the eggs into the pan. 4. Add cheese and cook until set. 5. Fold and serve.",
+  rating: 5,
+  user: user
+)
+
+puts "Seeds created!"
